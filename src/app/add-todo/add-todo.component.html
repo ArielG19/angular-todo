@@ -1,1 +1,45 @@
-<p>add-todo works!</p>
+<section>
+    <pre>{{todoForm.value | json}}</pre>
+    <h1>Form Reactive</h1>
+    <!-- usamos [formGroup] y formControlName para trabajar nuestro formulario reactivo-->
+    <!--form (ngSubmit)="onSubmit()" [formGroup]="contactForm"-->
+    <form (ngSubmit)="createTodo()" [formGroup]="todoForm">
+        <div>
+            <label for="name">Nombre de la tarea:</label>
+            <input type="text" id="name" name="name" formControlName="name"  required>
+            <!-- validamos que el campo name ha sido tocado y sea requerido -->
+            <!--p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']" class="invalid-field">Este campo es requerido</p-->
+    
+            <!-- validamos que el campo name ha sido tocado y tenga mas de 3 caracteres -->
+            <!--p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']" class="invalid-field">
+                El nombre debe de tener al menos {{contactForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres
+            </p-->
+        </div>
+        <div>
+            <label for="completed">Completada</label>
+            <input type="checkbox" id="completed" name="completed"  formControlName="completed">
+        </div>
+        <div>
+            <label for="category">Seleccionar categoria:</label>
+            <select name="category" id="category" name="category" formControlName="category">
+                <option *ngFor="let category of categoryTodo" [value]="category" [selected]="category">{{category}}</option>
+            </select>
+        </div>
+        <div>
+            <label for="comments">Comentario de la tarea:</label>
+            <textarea name="comments" id="comments" cols="30" rows="4" name="comments" formControlName="comments" required></textarea>
+            <!--p *ngIf="contactForm.get('comments')?.touched && contactForm.get('comments')?.errors?.['required']" class="invalid-field">Este campo es requerido</p-->
+        </div>
+        <div>
+            <!--button type="submit" [disabled]="contactForm.invalid">Save</button-->
+            <button type="submit">Save</button>
+        </div>
+    </form>
+    <ul>
+        <li *ngFor="let todo of saveTodo; index as i">
+            {{todo.name}}
+            
+        </li>
+    </ul>
+</section>
+
