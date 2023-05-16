@@ -37,7 +37,7 @@
     </form>
     <ul>
         <li *ngFor="let todo of saveTodo; index as i">
-            {{todo.name}}
+            {{todo.name}}/ {{todo.completed}} / {{todo.category}} / {{todo.comments}}
             
         </li>
     </ul>

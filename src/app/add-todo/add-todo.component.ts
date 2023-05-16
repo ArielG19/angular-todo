@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TodoService } from '../Service/todo-service.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -16,7 +17,7 @@ export class AddTodoComponent implements OnInit {
   //creamos nuestra propiedad para trabajar nuestro formulario reactivo
   todoForm!:FormGroup;
 
-  constructor(private readonly formBuilder:FormBuilder) { }
+  constructor(private readonly todoService: TodoService,private readonly formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
     //creamos nuestra instancia del formulario para trabajar el html
@@ -25,8 +26,13 @@ export class AddTodoComponent implements OnInit {
   }
 
   createTodo(){
-    console.log(this.todoForm.value);
-    this.saveTodo.push(this.todoForm.value)
+    //console.log(this.todoForm.value);
+    this.todoService.addTodoService(this.todoForm.value).subscribe(response => {
+      console.log(response)
+      this.saveTodo.push(response)
+      this.clearForm();
+    })
+    
   }
    //metodo para asignar o cargar datos en el formulario
    onPatchValue(){
@@ -45,4 +51,13 @@ export class AddTodoComponent implements OnInit {
       comments:['',[Validators.required]],
     })
   }
+   //limpiando el formulario
+   clearForm() {
+    this.todoForm.reset({
+          'name': '',
+          'completed':false,
+          'category': 'otros',
+          'comments': '',
+         });
+    }
 }
