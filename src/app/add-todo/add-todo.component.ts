@@ -51,7 +51,7 @@ export class AddTodoComponent implements OnInit {
    //metodo para asignar o cargar datos en el formulario
    onPatchValue(){
     this.todoForm.patchValue({
-      complete:false,
+      completed:false,
       category:'otros'
     })
   }

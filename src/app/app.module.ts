@@ -5,7 +5,13 @@ import { AppComponent } from './app.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +23,13 @@ import {HttpClientModule} from '@angular/common/http'
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,//Para usar llamada a apis
+    HttpClientModule,
+    BrowserAnimationsModule,//Para usar llamada a apis
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule
+    
     
   ],
   providers: [],

@@ -1,39 +1,29 @@
-<section>
     <pre>{{todoForm.value | json}}</pre>
     <h1>Form Reactive</h1>
     <!-- usamos [formGroup] y formControlName para trabajar nuestro formulario reactivo-->
-    <!--form (ngSubmit)="onSubmit()" [formGroup]="contactForm"-->
-    <form (ngSubmit)="createTodo()" [formGroup]="todoForm">
-        <div>
-            <label for="name">Nombre de la tarea:</label>
-            <input type="text" id="name" name="name" formControlName="name"  required>
-            <!-- validamos que el campo name ha sido tocado y sea requerido -->
-            <!--p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']" class="invalid-field">Este campo es requerido</p-->
-    
-            <!-- validamos que el campo name ha sido tocado y tenga mas de 3 caracteres -->
-            <!--p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']" class="invalid-field">
-                El nombre debe de tener al menos {{contactForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres
-            </p-->
-        </div>
-        <div>
-            <label for="completed">Completada</label>
-            <input type="checkbox" id="completed" name="completed"  formControlName="completed">
-        </div>
-        <div>
-            <label for="category">Seleccionar categoria:</label>
-            <select name="category" id="category" name="category" formControlName="category">
-                <option *ngFor="let category of categoryTodo" [value]="category" [selected]="category">{{category}}</option>
-            </select>
-        </div>
-        <div>
-            <label for="comments">Comentario de la tarea:</label>
-            <textarea name="comments" id="comments" cols="30" rows="4" name="comments" formControlName="comments" required></textarea>
-            <!--p *ngIf="contactForm.get('comments')?.touched && contactForm.get('comments')?.errors?.['required']" class="invalid-field">Este campo es requerido</p-->
-        </div>
-        <div>
-            <!--button type="submit" [disabled]="contactForm.invalid">Save</button-->
-            <button type="submit">Save</button>
-        </div>
+    <form (ngSubmit)="createTodo()" [formGroup]="todoForm" class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre de la tarea:</mat-label>
+            <input matInput placeholder="..." value="..."  name="name" formControlName="name" required>
+            <!-- validamos si nuestro campo ha sido tocado y el tipo de error-->
+            <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['required']">Este campo es requerido</mat-error>
+            <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['minlength']">El campo debe de tener al menos {{todoForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres</mat-error>
+        </mat-form-field>
+       
+        <mat-form-field>
+            <mat-label>Seleccionar categoria</mat-label>
+            <mat-select name="category" formControlName="category">
+                  <mat-option *ngFor="let category of categoryTodo" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripción de la tarea</mat-label>
+            <textarea matInput placeholder="..." name="comments" formControlName="comments" required></textarea>
+            <p *ngIf="todoForm.get('comments')?.touched && todoForm.get('comments')?.errors?.['required']" class="invalid-field">Este campo es requerido</p>
+        </mat-form-field>
+        <mat-checkbox name="completed"  formControlName="completed">Completada</mat-checkbox>
+
+        <button mat-stroked-button color="primary" type="submit" [disabled]="todoForm.invalid">Save</button>
     </form>
     <ul>
         <li *ngFor="let todo of saveTodo; index as i">
@@ -41,5 +31,4 @@
             
         </li>
     </ul>
-</section>
 
