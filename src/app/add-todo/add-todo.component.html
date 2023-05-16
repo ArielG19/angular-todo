@@ -19,7 +19,7 @@
         <mat-form-field class="example-full-width">
             <mat-label>Descripción de la tarea</mat-label>
             <textarea matInput placeholder="..." name="comments" formControlName="comments" required></textarea>
-            <p *ngIf="todoForm.get('comments')?.touched && todoForm.get('comments')?.errors?.['required']" class="invalid-field">Este campo es requerido</p>
+            <mat-error *ngIf="todoForm.get('comments')?.touched && todoForm.get('comments')?.errors?.['required']">Este campo es requerido</mat-error>
         </mat-form-field>
         <mat-checkbox name="completed"  formControlName="completed">Completada</mat-checkbox>
 
