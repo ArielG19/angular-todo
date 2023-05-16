@@ -20,11 +20,19 @@ export class AddTodoComponent implements OnInit {
   constructor(private readonly todoService: TodoService,private readonly formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+
+    //Cargando datos de api
+    this.todoService.getTodoService().subscribe(response => {
+        console.log(response)
+        this.saveTodo = [...response]
+    })
+
     //creamos nuestra instancia del formulario para trabajar el html
     this.todoForm = this.initForm();
     this.onPatchValue();
   }
 
+  //---------------- Crud + uso de service --------------------
   createTodo(){
     //console.log(this.todoForm.value);
     this.todoService.addTodoService(this.todoForm.value).subscribe(response => {
@@ -34,6 +42,12 @@ export class AddTodoComponent implements OnInit {
     })
     
   }
+
+
+
+
+  //---------------- implementacion de form reactive --------------------
+
    //metodo para asignar o cargar datos en el formulario
    onPatchValue(){
     this.todoForm.patchValue({

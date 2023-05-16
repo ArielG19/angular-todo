@@ -15,12 +15,16 @@ export class TodoService {
  
  
    //metodos crud service
- 
    addTodoService(todo: Todo): Observable<Todo>{
      //Propiedad body, contiene la data a modificar
      const body = {name:todo.name,completed:todo.completed,category:todo.category,comments:todo.comments}
  
      //pasamos nuestra url + la data
      return this.http.post<Todo>(this.API, body);
+   }
+   
+   getTodoService():Observable<Todo[]>{
+    //obtenemos los datos de la API y los devuelve como un Observable de tipo Todo[].
+    return this.http.get<Todo[]>(this.API);
    }
 }
