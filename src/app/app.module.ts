@@ -11,6 +11,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatOptionModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
+
 
 
 @NgModule({
@@ -28,7 +33,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatOptionModule,
+    MatListModule
     
     
   ],

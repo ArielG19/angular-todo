@@ -11,3 +11,6 @@
     display: block;
     padding-bottom: 3rem;
   }
+  .mat-expansion-panel-header-description {
+    flex-grow: 0.1;
+}

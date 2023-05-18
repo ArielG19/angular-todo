@@ -16,6 +16,7 @@ export class AddTodoComponent implements OnInit {
 
   //creamos nuestra propiedad para trabajar nuestro formulario reactivo
   todoForm!:FormGroup;
+  
 
   constructor(private readonly todoService: TodoService,private readonly formBuilder:FormBuilder) { }
 
@@ -25,6 +26,7 @@ export class AddTodoComponent implements OnInit {
     this.todoService.getTodoService().subscribe(response => {
         console.log(response)
         this.saveTodo = [...response]
+        this.clearForm();
     })
 
     //creamos nuestra instancia del formulario para trabajar el html
@@ -36,7 +38,7 @@ export class AddTodoComponent implements OnInit {
   createTodo(){
     //console.log(this.todoForm.value);
     this.todoService.addTodoService(this.todoForm.value).subscribe(response => {
-      console.log(response)
+      //console.log(response)
       this.saveTodo.push(response)
       this.clearForm();
     })

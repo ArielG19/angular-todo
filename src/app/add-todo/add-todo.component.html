@@ -1,9 +1,11 @@
     <pre>{{todoForm.value | json}}</pre>
     <h1>Form Reactive</h1>
     <!-- usamos [formGroup] y formControlName para trabajar nuestro formulario reactivo-->
-    <form (ngSubmit)="createTodo()" [formGroup]="todoForm" class="example-form">
+    <form (ngSubmit)="createTodo()" [formGroup]="todoForm" class="example-form" >
         <mat-form-field class="example-full-width">
-            <mat-label>Nombre de la tarea:</mat-label>
+            <!--mat-label>Nombre de la tarea:</mat-label-->
+            <mat-label [class.invalid]="todoForm.get('name')?.touched && todoForm.get('name')?.errors">Nombre de la tarea:</mat-label>
+
             <input matInput placeholder="..." value="..."  name="name" formControlName="name" required>
             <!-- validamos si nuestro campo ha sido tocado y el tipo de error-->
             <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['required']">Este campo es requerido</mat-error>
@@ -25,6 +27,27 @@
 
         <button mat-stroked-button color="primary" type="submit" [disabled]="todoForm.invalid">Save</button>
     </form>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let todo of saveTodo; index as i">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{todo.name}}
+            </mat-panel-title>
+            <mat-panel-description> {{ todo.completed ? 'Tarea Completeda' : 'Tarea pendiente' }} {{todo.category}}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>{{todo.comments}}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-chip color="warn">Orsssange</mat-chip>
+     
+
+      <mat-selection-list aria-label="Fish selection">
+        <mat-list-option>One fish</mat-list-option>
+        <mat-list-option>Two fish</mat-list-option>
+        <mat-list-option color="accent" selected>Accent fish</mat-list-option>
+        <mat-list-option color="warn">Warn fish</mat-list-option>
+      </mat-selection-list>
+      
     <ul>
         <li *ngFor="let todo of saveTodo; index as i">
             {{todo.name}}/ {{todo.completed}} / {{todo.category}} / {{todo.comments}}
