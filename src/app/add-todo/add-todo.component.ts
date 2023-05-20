@@ -40,6 +40,7 @@ export class AddTodoComponent implements OnInit {
       });
     });
   }
+ 
   
   
   //---------------- implementacion de form reactive --------------------

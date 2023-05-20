@@ -1,28 +1,24 @@
-<div class="container">
-    <div class="column">
-      <app-add-todo></app-add-todo>
-    </div>
-    <div class="column">
-        <h1>Mis TODO`s</h1>
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let todo of saveTodo; index as i">
-              <mat-expansion-panel-header>
-                <mat-panel-title [ngClass]="todo.completed ? 'completada' : 'pendiente' ">
-                    {{todo.name}}
-                </mat-panel-title>
-                <mat-panel-description><span class="mat-chip" [ngClass]="'chips-' + todo.category">{{todo.category}}</span> </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p>{{todo.comments}} {{todo.id}}</p>
-                  <div class="button-flex-container">
-                    <button mat-icon-button>
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button color="warn" (click)="deleteTodo(todo.id)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-            
-            </mat-expansion-panel>
-          </mat-accordion>
-    </div>
-</div>
+<section class="container-row">
+  <h1>Mis TODO`s</h1>
+  <button class="btn-dialog" mat-flat-button color="primary" (click)="openDialog()">Agregar</button>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let todo of saveTodo; index as i">
+          <mat-expansion-panel-header>
+            <mat-panel-title [ngClass]="todo.completed ? 'completada' : 'pendiente' ">
+                {{todo.name}}
+            </mat-panel-title>
+            <mat-panel-description><span class="mat-chip" [ngClass]="'chips-' + todo.category">{{todo.category}}</span> </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>{{todo.comments}} {{todo.id}}</p>
+              <div class="button-flex-container">
+                <button mat-icon-button>
+                  <mat-icon (click)="editTodo(todo.id)">edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteTodo(todo.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+        
+        </mat-expansion-panel>
+      </mat-accordion>
+</section>

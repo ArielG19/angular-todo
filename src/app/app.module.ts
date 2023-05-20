@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
@@ -17,6 +16,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { MatOptionModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog-component/dialog-component.component';
 
 
 
@@ -25,7 +25,8 @@ import {MatDialogModule} from '@angular/material/dialog';
   declarations: [
     AppComponent,
     AddTodoComponent,
-    ListTodoComponent
+    ListTodoComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

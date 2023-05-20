@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo.model';
 import { TodoService } from '../Service/todo-service.service';
 import { SharedService } from '../Service/shared-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog-component/dialog-component.component';
 
 @Component({
   selector: 'app-list-todo',
@@ -12,7 +14,7 @@ export class ListTodoComponent implements OnInit {
   //propiedad para guardar nuestra data
   saveTodo: Todo [] = [];
 
-  constructor(private readonly todoService: TodoService, private readonly sharedService:SharedService) { }
+  constructor(private dialog: MatDialog,private readonly todoService: TodoService, private readonly sharedService:SharedService) { }
 
   ngOnInit(): void {
     //nos suscribimos al EventEmitter y recibimos los todos
@@ -23,7 +25,12 @@ export class ListTodoComponent implements OnInit {
     // Obtener la lista completa de tareas al iniciar el componente
     this.refreshTodoList();
   }
-
+  openDialog() {
+    this.dialog.open(DialogComponent);
+  }
+  editTodo(id:string){
+    console.log(id);
+  }
   deleteTodo(id:string){
     //creamos confirmacion para eliminar
     if(confirm('Deseas eleminar este item')){

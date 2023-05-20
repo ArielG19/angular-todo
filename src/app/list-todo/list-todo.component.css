@@ -1,17 +1,24 @@
+:host{
+  display: grid;
+  place-items: center;
+  height: 50vh;
+}
+
 /*mis clases css*/
-.container {
-    display: flex;
-    flex-direction: column;
-  }
-  .column {
-    flex: 1;
-    padding: 20px;
-  }
-  /*css lista todo`s*/
-  .completada{
+.container-row{
+width: 70%;
+}
+.btn-dialog{
+  margin-bottom: 1rem;
+  position: absolute;
+  right: 15%;
+  top: 15%;
+}
+/*css lista todo`s*/
+.completada{
     text-decoration: line-through;
-  }
-  .mat-chip {
+}
+.mat-chip {
     font-size: 12px;
     font-weight: 500;
     padding-top: 4px;
@@ -20,8 +27,8 @@
     padding-right: 10px;
     border-radius: 14px;
     text-transform: uppercase;
-  }
-  .mat-expansion-panel-header-description {
+}
+.mat-expansion-panel-header-description {
   flex-grow: 0;
   /*display: flex;
   justify-content: space-between;*/
