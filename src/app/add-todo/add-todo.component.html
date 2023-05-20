@@ -1,57 +1,29 @@
-<div class="container">
-  <div class="column">
-    <pre>{{todoForm.value | json}}</pre>
-    <h1>Agregar nuevo TODO</h1>
-      <!-- usamos [formGroup] y formControlName para trabajar nuestro formulario reactivo-->
-      <form (ngSubmit)="createTodo()" [formGroup]="todoForm" class="example-form" >
-        <mat-form-field class="example-full-width">
-            <!--mat-label>Nombre de la tarea:</mat-label-->
-            <mat-label [class.invalid]="todoForm.get('name')?.touched && todoForm.get('name')?.errors">Nombre de la tarea:</mat-label>
-
-            <input matInput placeholder="..." value="..."  name="name" formControlName="name" required>
-            <!-- validamos si nuestro campo ha sido tocado y el tipo de error-->
-            <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['required']">Este campo es requerido</mat-error>
-            <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['minlength']">El campo debe de tener al menos {{todoForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres</mat-error>
-        </mat-form-field>
-       
-        <mat-form-field>
-            <mat-label>Seleccionar categoria</mat-label>
-            <mat-select name="category" formControlName="category">
-                  <mat-option *ngFor="let category of categoryTodo" [value]="category"><span>{{category}}</span> </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>Descripción de la tarea</mat-label>
-            <textarea matInput placeholder="..." name="comments" formControlName="comments" required></textarea>
-            <mat-error *ngIf="todoForm.get('comments')?.touched && todoForm.get('comments')?.errors?.['required']">Este campo es requerido</mat-error>
-        </mat-form-field>
-        <mat-checkbox name="completed"  formControlName="completed">Completada</mat-checkbox>
-
-        <button mat-stroked-button color="primary" type="submit" [disabled]="todoForm.invalid">Save</button>
-    </form>
-  </div>
-  <div class="column">
-    <h1>Mis TODO`s</h1>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let todo of saveTodo; index as i">
-          <mat-expansion-panel-header>
-            <mat-panel-title [ngClass]="todo.completed ? 'completada' : 'pendiente' ">
-                {{todo.name}}
-            </mat-panel-title>
-            <mat-panel-description><span class="mat-chip" [ngClass]="'chips-' + todo.category">{{todo.category}}</span> </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>{{todo.comments}} {{todo.id}}</p>
-              <div class="button-flex-container">
-                <button mat-icon-button>
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="deleteTodo(todo.id)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-        
-        </mat-expansion-panel>
-      </mat-accordion>
-  </div>
-</div>
-
+<pre>{{todoForm.value | json}}</pre>
+      <h1>Agregar nuevo TODO</h1>
+        <!-- usamos [formGroup] y formControlName para trabajar nuestro formulario reactivo-->
+        <form (ngSubmit)="createTodo()" [formGroup]="todoForm" class="example-form" >
+          <mat-form-field class="example-full-width">
+              <!--mat-label>Nombre de la tarea:</mat-label-->
+              <mat-label [class.invalid]="todoForm.get('name')?.touched && todoForm.get('name')?.errors">Nombre de la tarea:</mat-label>
+  
+              <input matInput placeholder="..." value="..."  name="name" formControlName="name" required>
+              <!-- validamos si nuestro campo ha sido tocado y el tipo de error-->
+              <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['required']">Este campo es requerido</mat-error>
+              <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['minlength']">El campo debe de tener al menos {{todoForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres</mat-error>
+          </mat-form-field>
+         
+          <mat-form-field>
+              <mat-label>Seleccionar categoria</mat-label>
+              <mat-select name="category" formControlName="category">
+                    <mat-option *ngFor="let category of categoryTodo" [value]="category"><span>{{category}}</span> </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+              <mat-label>Descripción de la tarea</mat-label>
+              <textarea matInput placeholder="..." name="comments" formControlName="comments" required></textarea>
+              <mat-error *ngIf="todoForm.get('comments')?.touched && todoForm.get('comments')?.errors?.['required']">Este campo es requerido</mat-error>
+          </mat-form-field>
+          <mat-checkbox name="completed"  formControlName="completed">Completada</mat-checkbox>
+  
+          <button mat-stroked-button color="primary" type="submit" [disabled]="todoForm.invalid">Save</button>
+        </form>

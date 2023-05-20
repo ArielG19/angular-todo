@@ -1,53 +1,3 @@
-/*mis clases css*/
-.container {
-  display: flex;
-  flex-direction: column;
-}
-.column {
-  flex: 1;
-  padding: 20px;
-}
-/*css lista todo`s*/
-.completada{
-  text-decoration: line-through;
-}
-.mat-chip {
-  font-size: 12px;
-  font-weight: 500;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 14px;
-  text-transform: uppercase;
-}
-.chips-Otros{
-  background: #9E9E9E;
-  color: #fff;
-}
-.chips-Iglesia{
-  background: #9b59b6;
-  color: #fff;
-}
-.chips-Trabajo{
-  background: #f1c40f;
-  color: #fff;
-}
-.chips-Casa{
-  background: #34495e;
-  color: #fff;
-}
-.chips-Familia{
-  background: #1abc9c;
-  color: #fff;
-}
-
-.button-flex-container{
-display: flex;
-justify-content: flex-end;
-grid-gap: 25px;
-}
-/*css lista todo`s*/
 
 /*clases angular material*/
 .example-form {
@@ -62,11 +12,7 @@ grid-gap: 25px;
   display: block;
   padding-bottom: 3rem;
 }
-.mat-expansion-panel-header-description {
-  flex-grow: 0;
-  /*display: flex;
-  justify-content: space-between;*/
-}
+
 .mat-chip.mat-standard-chip {
 background-color: #e0e0e0;
 color: rgba(0,0,0,.87);
