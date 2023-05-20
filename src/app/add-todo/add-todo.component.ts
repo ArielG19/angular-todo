@@ -24,7 +24,7 @@ export class AddTodoComponent implements OnInit {
 
     //Cargando datos de api
     this.todoService.getTodoService().subscribe(response => {
-        console.log(response)
+        //console.log(response)
         this.saveTodo = [...response]
         this.clearForm();
     })
@@ -42,7 +42,20 @@ export class AddTodoComponent implements OnInit {
       this.saveTodo.push(response)
       this.clearForm();
     })
-    
+  }
+  deleteTodo(id:string){
+    //creamos confirmacion para eliminar
+    if(confirm('Deseas eleminar este item')){
+      this.todoService.deleteTodoService(id).subscribe(response =>{
+        //console.log(response);
+        //creamos array temporal para sin el item eliminado
+        //filter incluye todos lo elementos diferentes(!==) a id(el que elimninamos)
+        const arrayTempo = this.saveTodo.filter(item => item.id != id);
+        //actualizamos nuestra lista
+        this.saveTodo = [...arrayTempo]
+      })
+    }
+   
   }
 
 

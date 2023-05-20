@@ -14,7 +14,9 @@ export class TodoService {
    constructor(private readonly http: HttpClient) { }
  
  
-   //metodos crud service
+   //metodos crud service //
+
+   //Agregar
    addTodoService(todo: Todo): Observable<Todo>{
      //Propiedad body, contiene la data a modificar
      const body = {name:todo.name,completed:todo.completed,category:todo.category,comments:todo.comments}
@@ -23,8 +25,13 @@ export class TodoService {
      return this.http.post<Todo>(this.API, body);
    }
    
+   //Listar
    getTodoService():Observable<Todo[]>{
     //obtenemos los datos de la API y los devuelve como un Observable de tipo Todo[].
     return this.http.get<Todo[]>(this.API);
    }
+   //Eliminar
+   deleteTodoService(id: string): Observable<void>{
+    return this.http.delete<void>(`${this.API}/${id}`);
+  }
 }

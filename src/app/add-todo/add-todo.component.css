@@ -1,48 +1,73 @@
+/*mis clases css*/
 .container {
   display: flex;
   flex-direction: column;
 }
-
 .column {
   flex: 1;
   padding: 20px;
 }
-
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
-  
-.example-full-width {
-    width: 100%;
-}
-.mat-checkbox{
-    display: block;
-    padding-bottom: 3rem;
-}
-.mat-expansion-panel-header-description {
-    flex-grow: 0.1;
-    display: flex;
-    justify-content: space-between;
+/*css lista todo`s*/
+.completada{
+  text-decoration: line-through;
 }
 .mat-chip {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  padding: 4px;
-  border-radius: 15px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 14px;
+  text-transform: uppercase;
+}
+.chips-Otros{
+  background: #9E9E9E;
+  color: #fff;
+}
+.chips-Iglesia{
+  background: #9b59b6;
+  color: #fff;
+}
+.chips-Trabajo{
+  background: #f1c40f;
+  color: #fff;
+}
+.chips-Casa{
+  background: #34495e;
+  color: #fff;
+}
+.chips-Familia{
+  background: #1abc9c;
+  color: #fff;
+}
+
+.button-flex-container{
+display: flex;
+justify-content: flex-end;
+grid-gap: 25px;
+}
+/*css lista todo`s*/
+
+/*clases angular material*/
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.example-full-width {
+  width: 100%;
+}
+.mat-checkbox{
+  display: block;
+  padding-bottom: 3rem;
+}
+.mat-expansion-panel-header-description {
+  flex-grow: 0;
+  /*display: flex;
+  justify-content: space-between;*/
 }
 .mat-chip.mat-standard-chip {
-  background-color: #e0e0e0;
-  color: rgba(0,0,0,.87);
-}
-::ng-deep span.Otros{
-  background: #9E9E9E;
-  padding-left: 10px;
-  color: #fff;
-  padding-right: 10px;
-  padding-bottom: 2px;
-  padding-top: 2px;
-  border-radius: 15px;
-
+background-color: #e0e0e0;
+color: rgba(0,0,0,.87);
 }
