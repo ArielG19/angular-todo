@@ -15,6 +15,7 @@ export class AddTodoComponent implements OnInit {
   //propiedad para guardar nuestra data
   saveTodo: Todo [] = [];
   categoryTodo:string[] = ['Otros','Iglesia','Trabajo','Casa','Familia'];
+  isVisible: boolean = true;
   
 
   //creamos nuestra propiedad para trabajar nuestro formulario reactivo
@@ -31,21 +32,18 @@ export class AddTodoComponent implements OnInit {
     this.todoForm = this.initForm();
     this.onPatchValue();
   }
-  toggleDivVisibility(): void {
-    const divElement = document.getElementById('myDiv');
-    if (divElement) {
-      const currentDisplay = divElement.style.display;
-      divElement.style.display = currentDisplay === 'block' ? 'none' : 'block';
-    }
+  
+
+  toggleVisibility(): void {
+    this.isVisible = !this.isVisible;
   }
   
   
   //---------------- Crud + uso de service --------------------
   createTodo() {
+    
     this.todoService.addTodoService(this.todoForm.value).subscribe(response => {
-      // Limpiar el formulario
-      this.clearForm();
-  
+   this.clearForm();
       // Obtener la lista actualizada de tareas
       this.todoService.getTodoService().subscribe(todos => {
         // Emitir los cambios al servicio compartido
@@ -61,27 +59,24 @@ export class AddTodoComponent implements OnInit {
    //metodo para asignar o cargar datos en el formulario
    onPatchValue(){
     this.todoForm.patchValue({
-      completed:false,
       category:'otros'
     })
   }
-  initForm(){
-    //aqui pasamos nuestros campos del formulario y los retornamos
+ 
+  initForm() {
     return this.formBuilder.group({
-      //validamos los campos desde aqui
-      name:['',[Validators.minLength(5)]],
-      completed:'',
-      category:[''],
-      comments:[''],
-    })
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      completed: false,
+      category: ['', Validators.required],
+      comments: ['', Validators.required],
+    });
   }
    //limpiando el formulario
    clearForm() {
-    this.todoForm.reset({
-          'name': '',
-          'completed':false,
-          'category': 'otros',
-          'comments': '',
-         });
-    }
+    this.todoForm.reset();
+    Object.keys(this.todoForm.controls).forEach(key => {
+      //eliminando cualquier error de validación en los formcontrol
+      this.todoForm.get(key)?.setErrors(null);
+    });
+  }
 }
