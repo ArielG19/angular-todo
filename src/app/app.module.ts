@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialogs/dialog-component/dialog-component.component';
 import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
+import { FilterPipe } from './pipes/filterPipes.pipe';
 
 
 
@@ -28,7 +29,8 @@ import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component
     AddTodoComponent,
     ListTodoComponent,
     DialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

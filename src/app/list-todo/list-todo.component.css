@@ -8,6 +8,11 @@
 .container-row{
 width: 50%;
 }
+.container-search{
+  display: flex;
+  flex-direction: column;
+
+}
 .btn-dialog{
  margin-bottom: 1rem;
 }

@@ -14,6 +14,7 @@ import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.componen
 export class ListTodoComponent implements OnInit {
   //propiedad para guardar nuestra data
   saveTodo: Todo [] = [];
+  searchItem!: '';
 
   constructor(private dialog: MatDialog,private readonly todoService: TodoService, private readonly sharedService:SharedService) { }
 

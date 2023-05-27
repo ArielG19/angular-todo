@@ -1,8 +1,14 @@
 <section class="container-row">
   <h1>Mis TODO`s</h1>
+  <div class="container-search">
+  <h4>Buscar ciudades</h4>
+  <mat-form-field>
+    <input matInput type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchItem">
+  </mat-form-field>
+</div>
   <button class="btn-dialog" mat-flat-button color="primary" (click)="addDialog()">Agregar</button>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let todo of saveTodo; index as i">
+        <mat-expansion-panel  *ngFor="let todo of (saveTodo | pipeFilter:searchItem)" >
           <mat-expansion-panel-header>
             <mat-panel-title [ngClass]="todo.completed ? 'completada' : 'pendiente' ">
                 {{todo.name}}
@@ -20,5 +26,6 @@
               </div>
         
         </mat-expansion-panel>
+        
       </mat-accordion>
 </section>
