@@ -3,7 +3,8 @@ import { Todo } from '../model/todo.model';
 import { TodoService } from '../Service/todo-service.service';
 import { SharedService } from '../Service/shared-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog-component/dialog-component.component';
+import { DialogComponent } from '../dialogs/dialog-component/dialog-component.component';
+import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-list-todo',
@@ -25,12 +26,17 @@ export class ListTodoComponent implements OnInit {
     // Obtener la lista completa de tareas al iniciar el componente
     this.refreshTodoList();
   }
-  openDialog() {
+
+  /*Dialogs */
+  addDialog() {
     this.dialog.open(DialogComponent);
   }
-  editTodo(id:string){
-    console.log(id);
+  editDialog(todo:Todo){
+    console.log(todo.id);
+    this.dialog.open(EditDialogComponent, {data:todo});
   }
+  /*Dialogs */
+
   deleteTodo(id:string){
     //creamos confirmacion para eliminar
     if(confirm('Deseas eleminar este item')){

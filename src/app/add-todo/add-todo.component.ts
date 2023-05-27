@@ -3,6 +3,7 @@ import { Todo } from '../model/todo.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../Service/todo-service.service';
 import { SharedService } from '../Service/shared-service.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-todo',
@@ -14,19 +15,31 @@ export class AddTodoComponent implements OnInit {
   //propiedad para guardar nuestra data
   saveTodo: Todo [] = [];
   categoryTodo:string[] = ['Otros','Iglesia','Trabajo','Casa','Familia'];
+  
 
   //creamos nuestra propiedad para trabajar nuestro formulario reactivo
   todoForm!:FormGroup;
   
 
-  constructor(private readonly todoService: TodoService,private readonly sharedService:SharedService,private readonly formBuilder:FormBuilder) { }
+  constructor(
+    private readonly todoService: TodoService,
+    private readonly sharedService:SharedService,
+    private readonly formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
     //creamos nuestra instancia del formulario para trabajar el html
     this.todoForm = this.initForm();
     this.onPatchValue();
   }
-
+  toggleDivVisibility(): void {
+    const divElement = document.getElementById('myDiv');
+    if (divElement) {
+      const currentDisplay = divElement.style.display;
+      divElement.style.display = currentDisplay === 'block' ? 'none' : 'block';
+    }
+  }
+  
+  
   //---------------- Crud + uso de service --------------------
   createTodo() {
     this.todoService.addTodoService(this.todoForm.value).subscribe(response => {

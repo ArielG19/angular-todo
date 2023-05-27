@@ -1,0 +1,24 @@
+
+/*clases angular material*/
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  .example-full-width {
+    width: 100%;
+  }
+  .mat-checkbox{
+    display: block;
+    padding-bottom: 3rem;
+  }
+  
+  .mat-chip.mat-standard-chip {
+  background-color: #e0e0e0;
+  color: rgba(0,0,0,.87);
+  }
+  .btn-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }

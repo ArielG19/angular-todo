@@ -6,13 +6,10 @@
 
 /*mis clases css*/
 .container-row{
-width: 70%;
+width: 50%;
 }
 .btn-dialog{
-  margin-bottom: 1rem;
-  position: absolute;
-  right: 15%;
-  top: 15%;
+ margin-bottom: 1rem;
 }
 /*css lista todo`s*/
 .completada{

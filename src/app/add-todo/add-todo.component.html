@@ -5,11 +5,10 @@
           <mat-form-field class="example-full-width">
               <!--mat-label>Nombre de la tarea:</mat-label-->
               <mat-label [class.invalid]="todoForm.get('name')?.touched && todoForm.get('name')?.errors">Nombre de la tarea:</mat-label>
-  
               <input matInput placeholder="..." value="..."  name="name" formControlName="name" required>
               <!-- validamos si nuestro campo ha sido tocado y el tipo de error-->
-              <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['required']">Este campo es requerido</mat-error>
-              <mat-error *ngIf="todoForm.get('name')?.touched && todoForm.get('name')?.errors?.['minlength']">El campo debe de tener al menos {{todoForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres</mat-error>
+              <mat-error *ngIf="todoForm.get('name')?.hasError('required')">Este campo es requerido</mat-error>
+              <mat-error *ngIf="todoForm.get('name')?.hasError('minlength')">El campo debe tener al menos {{ todoForm.get('name')?.getError('minlength')?.requiredLength }} caracteres</mat-error>
           </mat-form-field>
          
           <mat-form-field>
@@ -21,9 +20,10 @@
           <mat-form-field class="example-full-width">
               <mat-label>Descripción de la tarea</mat-label>
               <textarea matInput placeholder="..." name="comments" formControlName="comments" required></textarea>
-              <mat-error *ngIf="todoForm.get('comments')?.touched && todoForm.get('comments')?.errors?.['required']">Este campo es requerido</mat-error>
+              <mat-error *ngIf="todoForm.get('comments')?.hasError('required')">Este campo es requerido</mat-error>
           </mat-form-field>
           <mat-checkbox name="completed"  formControlName="completed">Completada</mat-checkbox>
   
           <button mat-stroked-button color="primary" type="submit" [disabled]="todoForm.invalid">Save</button>
+          
         </form>

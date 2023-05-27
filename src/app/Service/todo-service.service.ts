@@ -30,6 +30,11 @@ export class TodoService {
     //obtenemos los datos de la API y los devuelve como un Observable de tipo Todo[].
     return this.http.get<Todo[]>(this.API);
    }
+   updateTodoService(todo: Todo): Observable<void>{
+    const body = {name:todo.name,completed:todo.completed,category:todo.category,comments:todo.comments}
+    //aqui pasamos nuestra url + id y como segundo parametro la data a modificar
+    return this.http.put<void>(`${this.API}/${todo.id}`,body);
+  }
    //Eliminar
    deleteTodoService(id: string): Observable<void>{
     return this.http.delete<void>(`${this.API}/${id}`);

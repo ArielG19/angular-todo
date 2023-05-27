@@ -1,0 +1,29 @@
+<h1>Editar TODO</h1>
+<form (ngSubmit)="updateTodo()" [formGroup]="editForm" class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Nombre de la tarea:</mat-label>
+    <input matInput name="name" formControlName="name" required>
+    <mat-error *ngIf="editForm.get('name')?.hasError('required')">Este campo es requerido</mat-error>
+    <mat-error *ngIf="editForm.get('name')?.hasError('minlength')">El campo debe tener al menos {{ editForm.get('name')?.getError('minlength')?.requiredLength }} caracteres</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Seleccionar categoría</mat-label>
+    <mat-select name="category" formControlName="category">
+      <mat-option *ngFor="let category of categoryTodo" [value]="category">{{ category }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="editForm.get('category')?.hasError('required')">Este campo es requerido</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Descripción de la tarea</mat-label>
+    <textarea matInput placeholder="..." name="comments" formControlName="comments" required></textarea>
+    <mat-error *ngIf="editForm.get('comments')?.hasError('required')">Este campo es requerido</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox name="completed" formControlName="completed">Completada</mat-checkbox>
+  <div class="btn-actions">
+    <button mat-stroked-button color="warn" (click)="closeModal()">Cerrar</button>
+    <button mat-stroked-button color="primary" type="submit" [disabled]="editForm.invalid">Editar</button>
+  </div>
+</form>

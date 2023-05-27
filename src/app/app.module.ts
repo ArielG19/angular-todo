@@ -16,7 +16,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import { MatOptionModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DialogComponent } from './dialog-component/dialog-component.component';
+import { DialogComponent } from './dialogs/dialog-component/dialog-component.component';
+import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
 
 
 
@@ -26,7 +27,8 @@ import { DialogComponent } from './dialog-component/dialog-component.component';
     AppComponent,
     AddTodoComponent,
     ListTodoComponent,
-    DialogComponent
+    DialogComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,

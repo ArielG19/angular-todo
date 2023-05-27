@@ -1,6 +1,6 @@
 <section class="container-row">
   <h1>Mis TODO`s</h1>
-  <button class="btn-dialog" mat-flat-button color="primary" (click)="openDialog()">Agregar</button>
+  <button class="btn-dialog" mat-flat-button color="primary" (click)="addDialog()">Agregar</button>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let todo of saveTodo; index as i">
           <mat-expansion-panel-header>
@@ -12,7 +12,7 @@
           <p>{{todo.comments}} {{todo.id}}</p>
               <div class="button-flex-container">
                 <button mat-icon-button>
-                  <mat-icon (click)="editTodo(todo.id)">edit</mat-icon>
+                  <mat-icon (click)="editDialog(todo)">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn" (click)="deleteTodo(todo.id)">
                   <mat-icon>delete</mat-icon>

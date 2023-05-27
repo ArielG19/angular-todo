@@ -17,3 +17,8 @@
 background-color: #e0e0e0;
 color: rgba(0,0,0,.87);
 }
+.btn-actions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
