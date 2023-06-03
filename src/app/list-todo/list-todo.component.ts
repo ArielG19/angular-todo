@@ -5,6 +5,7 @@ import { SharedService } from '../Service/shared-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialogs/dialog-component/dialog-component.component';
 import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list-todo',
@@ -12,56 +13,94 @@ import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.componen
   styleUrls: ['./list-todo.component.css']
 })
 export class ListTodoComponent implements OnInit {
-  //propiedad para guardar nuestra data
-  saveTodo: Todo [] = [];
+  // Propiedad para guardar nuestros todos
+  saveTodo: Todo[] = [];
   searchItem!: '';
-  
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalItems = 0;
 
-  constructor(private dialog: MatDialog,private readonly todoService: TodoService, private readonly sharedService:SharedService) { }
+  constructor(
+    private dialog: MatDialog,
+    private readonly todoService: TodoService,
+    private readonly sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
-    //nos suscribimos al EventEmitter y recibimos los todos
-    this.sharedService.todosUpdatedEmitter.subscribe(todos => {
-      // asignamos los todos a la propiedad saveTodo del componente. 
+    // Nos suscribimos al EventEmitter y recibimos los todos actualizados
+    this.sharedService.todosUpdatedEmitter.subscribe((todos: Todo[]) => {
+      // Asignamos los todos a la propiedad saveTodo del componente
       this.saveTodo = todos;
     });
-    // Obtener la lista completa de tareas al iniciar el componente
+
+    // Nos suscribimos al EventEmitter para detectar cuando se agrega un nuevo todo
+    this.sharedService.newTodoAddedEmitter.subscribe(() => {
+      // Reiniciamos la página actual y actualizamos la lista de todos
+      this.currentPage = 1;
+      this.refreshTodoList();
+    });
+
+    // Obtenemos la lista de todos al iniciar el componente
     this.refreshTodoList();
   }
 
   /*Dialogs */
   addDialog() {
+    // Abre el diálogo para agregar un nuevo todo
     this.dialog.open(DialogComponent);
   }
-  editDialog(todo:Todo){
-    //console.log(todo.id);
-    this.dialog.open(EditDialogComponent, {data:todo});
+
+  editDialog(todo: Todo) {
+    // Abre el diálogo para editar un todo existente
+    this.dialog.open(EditDialogComponent, { data: todo });
   }
   /*Dialogs */
 
-  deleteTodo(id:string){
-    //creamos confirmacion para eliminar
-    if(confirm('Deseas eleminar este item')){
-      this.todoService.deleteTodoService(id).subscribe(response =>{
-        //creamos array temporal sin el item eliminado
-        //filter incluye todos lo elementos diferentes(!==) a id(el que elimninamos)
+  deleteTodo(id: string) {
+    // Mostramos una confirmación antes de eliminar el todo
+    if (confirm('¿Deseas eliminar este elemento?')) {
+      this.todoService.deleteTodoService(id).subscribe(response => {
+        // Filtramos los elementos diferentes (!==) al ID que queremos eliminar
         const arrayTempo = this.saveTodo.filter(item => item.id != id);
-        //actualizamos nuestra lista
-        this.saveTodo = [...arrayTempo]
-      })
+        // Actualizamos nuestra lista de todos
+        this.saveTodo = [...arrayTempo];
+      });
     }
   }
+
   private refreshTodoList() {
-    //obtenemos la lista de tareas del servicio TodoService 
     this.todoService.getTodoService().subscribe(todos => {
-      //asignamos los resultados a saveTodo.
-      this.saveTodo = todos;
-      //emitimos los cambios al servicio compartido utilizando el método actualizarTodos() del servicio SharedService.
+      this.totalItems = todos.length;
+
+      // Ordenamos los todos por ID en orden descendente
+      todos.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      this.saveTodo = todos.slice(startIndex, endIndex);
+
+      // Actualizamos los todos en el servicio compartido
       this.sharedService.actualizarTodos(this.saveTodo);
+
+      // Si la página actual es mayor que el número total de páginas, ajustamos la página actual
+      if (this.currentPage > this.totalPages) {
+        this.currentPage = this.totalPages;
+        this.refreshTodoList();
+      }
     });
   }
 
-  
+  goToPage(pageNumber: number) {
+    // Navega a la página solicitada si es válida
+    if (pageNumber >= 1 && pageNumber <= this.totalPages) {
+      this.currentPage = pageNumber;
+      this.refreshTodoList();
+    }
+  }
   
 
+  get totalPages(): number {
+    // Calcula el número total de páginas basado en la cantidad de elementos por página
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
 }

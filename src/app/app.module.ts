@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialogs/dialog-component/dialog-component.component';
 import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
 import { FilterPipe } from './pipes/filterPipes.pipe';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -47,7 +48,8 @@ import { FilterPipe } from './pipes/filterPipes.pipe';
     MatOptionModule,
     MatListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
     
     
   ],

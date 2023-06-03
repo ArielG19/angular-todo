@@ -31,4 +31,25 @@
               </div>
         </mat-expansion-panel>
       </mat-accordion>
+      <div class="pagination">
+        <div class="pagination-button">
+          <button mat-icon-button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+            <mat-icon>first_page</mat-icon>
+          </button>
+          <button mat-icon-button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+           <button mat-icon-button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+          <button mat-icon-button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">
+            <mat-icon>last_page</mat-icon>
+          </button>
+        </div>
+        <div class="pagination-info">
+          <span class="page-info">{{ itemsPerPage }} elementos por página</span> / 
+          <span class="page-info">Página {{ currentPage }} - {{ totalPages }}</span>
+        </div>
+      </div>
+      
 </section>

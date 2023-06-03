@@ -7,6 +7,7 @@ import { Todo } from '../model/todo.model';
 export class SharedService {
    // Evento EventEmitter para emitir cambios en la lista de tareas de tipo Todo[]
   public todosUpdatedEmitter: EventEmitter<Todo[]> = new EventEmitter<Todo[]>();
+  public newTodoAddedEmitter: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() { }
   //El método actualizarTodos() recibe una lista de tareas (todos) y emite los cambios a través del evento todosUpdated.

@@ -6,7 +6,7 @@
 
 /*mis clases css*/
 .container-row{
-width: 90%;
+width: 95%;
 }
 .container-search{
   display: flex;
@@ -34,6 +34,7 @@ width: 90%;
   flex-grow: 0;
   /*display: flex;
   justify-content: space-between;*/
+  align-items: center;
 }
   .chips-Otros{
     background: #9E9E9E;
@@ -60,6 +61,16 @@ width: 90%;
   display: flex;
   justify-content: flex-end;
   grid-gap: 25px;
+  }
+  /*pagination*/
+  .pagination{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pagination-info{
+    font-size:10px
   }
   /*css lista todo`s*/
   @media only screen and (min-width: 1024px) {

@@ -12,58 +12,53 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddTodoComponent implements OnInit {
 
-  //propiedad para guardar nuestra data
-  saveTodo: Todo [] = [];
-  categoryTodo:string[] = ['Otros','Iglesia','Trabajo','Casa','Familia'];
+  // Propiedad para guardar nuestra data
+  saveTodo: Todo[] = [];
+  categoryTodo: string[] = ['Otros', 'Iglesia', 'Trabajo', 'Casa', 'Familia'];
   isVisible: boolean = true;
-  
 
-  //creamos nuestra propiedad para trabajar nuestro formulario reactivo
-  todoForm!:FormGroup;
-  
+  // Creamos nuestra propiedad para trabajar con nuestro formulario reactivo
+  todoForm!: FormGroup;
 
   constructor(
     private readonly todoService: TodoService,
-    private readonly sharedService:SharedService,
-    private readonly formBuilder:FormBuilder) { }
+    private readonly sharedService: SharedService,
+    private readonly formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    //creamos nuestra instancia del formulario para trabajar el html
+    // Creamos nuestra instancia del formulario para trabajar con el HTML
     this.todoForm = this.initForm();
     this.onPatchValue();
   }
-  
 
   toggleVisibility(): void {
     this.isVisible = !this.isVisible;
   }
-  
-  
-  //---------------- Crud + uso de service --------------------
+
+  //---------------- CRUD + Uso del servicio --------------------
+
   createTodo() {
-    
+    // Agrega un nuevo todo utilizando el servicio
     this.todoService.addTodoService(this.todoForm.value).subscribe(response => {
-   this.clearForm();
-      // Obtener la lista actualizada de tareas
-      this.todoService.getTodoService().subscribe(todos => {
-        // Emitir los cambios al servicio compartido
-        this.sharedService.actualizarTodos(todos);
-      });
+      // Limpia el formulario después de agregar el todo
+      this.clearForm(); 
+      // Emite un evento para indicar que se ha agregado un nuevo todo
+      this.sharedService.newTodoAddedEmitter.emit(); 
     });
   }
- 
-  
-  
-  //---------------- implementacion de form reactive --------------------
 
-   //metodo para asignar o cargar datos en el formulario
-   onPatchValue(){
+  //---------------- Implementación del formulario reactivo --------------------
+
+  // Método para asignar o cargar datos en el formulario
+  onPatchValue() {
     this.todoForm.patchValue({
-      category:'Otros'
-    })
+      category: 'Otros'
+    });
   }
- 
+
   initForm() {
+    // Inicializa el formulario reactivo con sus controles y validaciones
     return this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       completed: false,
@@ -71,11 +66,12 @@ export class AddTodoComponent implements OnInit {
       comments: ['', Validators.required],
     });
   }
-   //limpiando el formulario
-   clearForm() {
+
+  // Limpia el formulario
+  clearForm() {
     this.todoForm.reset();
     Object.keys(this.todoForm.controls).forEach(key => {
-      //eliminando cualquier error de validación en los formcontrol
+      // Elimina cualquier error de validación en los formcontrols
       this.todoForm.get(key)?.setErrors(null);
     });
   }
