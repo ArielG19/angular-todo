@@ -6,7 +6,7 @@
 
 /*mis clases css*/
 .container-row{
-width: 50%;
+width: 90%;
 }
 .container-search{
   display: flex;
@@ -62,4 +62,8 @@ width: 50%;
   grid-gap: 25px;
   }
   /*css lista todo`s*/
-  
+  @media only screen and (min-width: 1024px) {
+    .container-row{
+      width: 50%;
+      }
+  }
