@@ -17,7 +17,7 @@ export class ListTodoComponent implements OnInit {
   saveTodo: Todo[] = [];
   searchItem!: '';
   currentPage = 1;
-  itemsPerPage = 10;
+  itemsPerPage = 5;
   totalItems = 0;
 
   constructor(
