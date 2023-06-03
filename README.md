@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.5.
 
-## Descriptición
+## Description
 Proyecto practico de angular el cual consiste en crear tareas, el proyecto cuenta con las siguientes funciones crear,listar,editar, eliminar tareas, buscador de tareas, paginación de tareas.
 
 Se ha implementado angular material para construir la interfaz de usuario, implementando listas, dialogs,etc.
