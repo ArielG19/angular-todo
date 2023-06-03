@@ -10,7 +10,7 @@ import { Todo } from '../model/todo.model';
 export class TodoService {
 
    //propiedad de nuestra url
-   private readonly API = environment.api;
+   private readonly API = environment.api
    constructor(private readonly http: HttpClient) { }
  
  
