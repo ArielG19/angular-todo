@@ -6,13 +6,15 @@ import { Todo } from "../model/todo.model";
 })
 export class FilterPipe implements PipeTransform {
 
+  //values -> contiene el objeto, arg -> el texto de busqueda
   transform(value: Todo[], args: string): Todo[] {
+    //si arg no tiene un valor, devolvemos el value si modificar nada
     if (!args) {
       return value;
     }
 
-    const searchTerm = args.toLowerCase();
-    const filteredTodos: Todo[] = [];
+    const searchTerm = args.toLowerCase(); //convertimos la busqueda a minus.
+    const filteredTodos: Todo[] = []; //los items filtrados
 
     // Opciones de filtrado
     const filters = {
@@ -23,7 +25,7 @@ export class FilterPipe implements PipeTransform {
 
     // Recorrer cada tarea
     for (const todo of value) {
-      // Verificar cada opción de filtrado
+      // Verificar cada opción de filtrado si coincide para incluirlo al nuevo objeto
       if (
         (filters.name && todo.name.toLowerCase().includes(searchTerm)) ||
         (filters.category && todo.category.toLowerCase().includes(searchTerm)) ||
@@ -33,12 +35,12 @@ export class FilterPipe implements PipeTransform {
         filteredTodos.push(todo);
       }
     }
-
-    if (filteredTodos.length === 0) {
-      // Agregar un objeto con el texto de "No hay resultados" al resultado filtrado
-     // filteredTodos.push({ id: '', name: 'No hay resultados', category: '', completed: false, comments: '' });
+    //sino un objeto vacio, para mostrar un mensaje
+    if (filteredTodos.length === 0 && args) {
+      return [];
     }
 
+    //regresamos un objetos con la busqueda
     return filteredTodos;
   }
 }

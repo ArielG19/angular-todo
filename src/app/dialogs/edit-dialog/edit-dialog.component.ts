@@ -59,11 +59,9 @@ export class EditDialogComponent implements OnInit {
       ...this.item,
       ...this.editForm.value
     };
-  
+    //actualizamos nuestra data
     this.todoService.updateTodoService(updatedTodo).subscribe(
       () => {
-        //console.log('Todo updated successfully');
-
         // Obtener la lista actualizada de tareas
         this.todoService.getTodoService().subscribe(todos => {
           // Emitir los cambios al servicio compartido
@@ -72,7 +70,7 @@ export class EditDialogComponent implements OnInit {
         this.closeModal();
       },
       (error: any) => {
-        console.error('Error updating todo:', error);
+        console.error('Error al actualizar tarea:', error);
       }
     );
 

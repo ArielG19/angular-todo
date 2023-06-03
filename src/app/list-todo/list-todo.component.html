@@ -1,12 +1,17 @@
 <section class="container-row">
   <h1>Mis TODO`s</h1>
-  <div class="container-search">
-  <h4>Buscar todo´s</h4>
-  <mat-form-field>
-    <input matInput type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchItem">
-  </mat-form-field>
-</div>
-  <button class="btn-dialog" mat-flat-button color="primary" (click)="addDialog()">Agregar</button>
+      <div class="container-search">
+        <h4>Buscar todo´s</h4>
+        <mat-form-field>
+          <input matInput type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="searchItem">
+        </mat-form-field>
+      </div>
+      <button class="btn-dialog" mat-flat-button color="primary" (click)="addDialog()">Agregar</button>
+      
+      <!--validamos que se este usando el buscador-->
+      <div *ngIf=" searchItem && (saveTodo | pipeFilter:searchItem).length === 0" class="no-results">
+        No hay resultados
+      </div>
       <mat-accordion>
         <mat-expansion-panel  *ngFor="let todo of (saveTodo | pipeFilter:searchItem)" >
           <mat-expansion-panel-header>
@@ -24,8 +29,6 @@
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
-        
         </mat-expansion-panel>
-        
       </mat-accordion>
 </section>

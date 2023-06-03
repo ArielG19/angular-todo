@@ -15,6 +15,7 @@ export class ListTodoComponent implements OnInit {
   //propiedad para guardar nuestra data
   saveTodo: Todo [] = [];
   searchItem!: '';
+  
 
   constructor(private dialog: MatDialog,private readonly todoService: TodoService, private readonly sharedService:SharedService) { }
 
@@ -33,7 +34,7 @@ export class ListTodoComponent implements OnInit {
     this.dialog.open(DialogComponent);
   }
   editDialog(todo:Todo){
-    console.log(todo.id);
+    //console.log(todo.id);
     this.dialog.open(EditDialogComponent, {data:todo});
   }
   /*Dialogs */
